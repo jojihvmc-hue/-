@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE SCOTTS TOWER — A Vertical City · 38 Scotts Road, Singapore</title>
+<meta name="description" content="THE SCOTTS TOWER, 38 Scotts Road. A vertical city above Orchard Road, designed by UNStudio. Concept site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b;
+  --ink-2:#111113;
+  --ink-3:#18181b;
+  --line:rgba(232,220,196,.14);
+  --text:#ece7dd;
+  --muted:#a29b8f;
+  --champagne:#d6bf93;
+  --champagne-2:#efe0bf;
+  --serif:"Cormorant Garamond","Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --pad:clamp(1.25rem,5vw,6rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.65;font-size:clamp(15px,1.05vw,17px);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:300;margin:0;line-height:1.02;letter-spacing:.01em}
+p{margin:0 0 1.1em}
+.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--champagne);font-weight:400;display:inline-flex;align-items:center;gap:.9em;margin-bottom:1.6rem}
+.eyebrow::before{content:"";width:2.4rem;height:1px;background:var(--champagne);opacity:.7}
+.lede{font-family:var(--serif);font-size:clamp(1.25rem,1.9vw,1.75rem);line-height:1.4;color:var(--text);font-weight:300}
+.muted{color:var(--muted)}
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+
+/* Image blocks: background with a graceful gradient fallback */
+.img{position:absolute;inset:0;background-size:cover;background-position:center;background-color:#1a1814}
+.img::after{content:"";position:absolute;inset:0;pointer-events:none}
+
+/* ---------- Top bar ---------- */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1.3rem var(--pad);mix-blend-mode:normal;pointer-events:none}
+.topbar > *{pointer-events:auto}
+.brand{font-family:var(--serif);font-size:1.05rem;letter-spacing:.38em;text-decoration:none;color:var(--text)}
+.topbar .cta-mini{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line);padding:.7em 1.2em;border-radius:999px;background:rgba(10,10,11,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:border-color .3s,color .3s}
+.topbar .cta-mini:hover{border-color:var(--champagne);color:var(--champagne)}
+
+/* ---------- HUD ---------- */
+.hud{position:fixed;right:var(--pad);top:50%;transform:translateY(-50%);z-index:40;display:flex;align-items:center;gap:1rem;pointer-events:none}
+.hud-text{text-align:right}
+.hud-level{font-family:var(--serif);font-size:2.2rem;line-height:1;color:var(--champagne-2);font-variant-numeric:tabular-nums}
+.hud-name{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-top:.45rem;white-space:nowrap}
+.hud-rail{position:relative;width:1px;height:38vh;background:var(--line)}
+.hud-fill{position:absolute;left:0;bottom:0;width:1px;height:0;background:var(--champagne);transition:height .2s linear}
+.hud-dot{position:absolute;left:-3px;bottom:0;width:7px;height:7px;border-radius:50%;background:var(--champagne);box-shadow:0 0 0 4px rgba(214,191,147,.15);transition:bottom .2s linear}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate}
+.hero .img{
+  background-image:
+    url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=80"),
+    radial-gradient(120% 80% at 70% 10%,#5b4a3a 0%,#1d1915 45%,#0a0a0b 100%);
+  transform-origin:50% 60%}
+.hero .img::after{background:linear-gradient(180deg,rgba(10,10,11,.55) 0%,rgba(10,10,11,.1) 35%,rgba(10,10,11,.55) 70%,var(--ink) 100%),linear-gradient(90deg,rgba(40,24,10,.35),transparent 60%)}
+.hero-inner{position:relative;z-index:2;width:100%;padding:0 var(--pad) clamp(3rem,9vh,7rem)}
+.hero h1{font-size:clamp(3.2rem,11.5vw,12.5rem);font-weight:300;letter-spacing:-.01em;line-height:.88}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.04em}
+.hero h1 .line span{display:inline-block}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1.5rem;margin-top:clamp(1.5rem,3vh,2.5rem);border-top:1px solid var(--line);padding-top:1.4rem}
+.tagline{font-family:var(--sans);font-size:clamp(.8rem,1vw,.95rem);letter-spacing:.45em;color:var(--champagne)}
+.loc{font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.scroll-cue{position:absolute;left:50%;bottom:1.4rem;transform:translateX(-50%);z-index:3;font-size:.62rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.scroll-cue i{display:block;width:1px;height:42px;background:linear-gradient(var(--champagne),transparent);animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- Generic section ---------- */
+.section{position:relative;padding:clamp(6rem,14vh,11rem) 0}
+.section h2{font-size:clamp(2.6rem,6.5vw,6.5rem)}
+.section h2 em{font-style:italic;color:var(--champagne-2)}
+
+/* ---------- Sky Lobby ---------- */
+.lobby{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,6vw,7rem);align-items:center}
+.lobby-media{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:2px}
+.lobby-media .img{background-image:url("https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1600&q=80"),linear-gradient(160deg,#6b5234,#2a2018 55%,#120f0c)}
+.lobby-media .img::after{background:linear-gradient(180deg,transparent 55%,rgba(10,10,11,.55))}
+.lobby-media .tag{position:absolute;left:1.2rem;bottom:1.1rem;z-index:2;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--champagne-2)}
+.lobby-copy h2{margin-bottom:2rem}
+.detail-list{list-style:none;padding:0;margin:2.2rem 0 0;border-top:1px solid var(--line)}
+.detail-list li{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.detail-list li span:first-child{color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;padding-top:.2em}
+.detail-list li span:last-child{text-align:right}
+.lobby-small{position:relative;margin-top:2.4rem;aspect-ratio:16/9;overflow:hidden;max-width:420px}
+.lobby-small .img{background-image:url("https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1000&q=80"),linear-gradient(140deg,#4a3826,#16120e)}
+
+/* ---------- Gardens ---------- */
+.gardens{padding:0}
+.gardens-stage{position:relative;height:100vh;height:100svh;min-height:560px;overflow:hidden}
+.gardens-stage .img{background-image:url("https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=2400&q=80"),linear-gradient(170deg,#2c4f55 0%,#18302f 50%,#0b1413 100%)}
+.gardens-stage .img::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(10,10,11,.15) 22%,rgba(10,10,11,.2) 60%,var(--ink) 100%)}
+.gardens-copy{position:absolute;inset:auto 0 0 0;z-index:2;padding:0 var(--pad) clamp(3rem,10vh,6rem);display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:end}
+.gardens-copy h2{font-size:clamp(2.6rem,7vw,7rem)}
+.amenities{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line)}
+.amenity{padding:1.1rem 0;border-bottom:1px solid var(--line)}
+.amenity:nth-child(odd){padding-right:1rem}
+.amenity b{display:block;font-family:var(--serif);font-weight:300;font-size:1.9rem;line-height:1.1;color:var(--champagne-2)}
+.amenity small{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- Ascent ---------- */
+.ascent{position:relative;display:grid;grid-template-columns:minmax(280px,1fr) 1.15fr;padding:0 var(--pad)}
+.ascent-visual{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;gap:clamp(1.5rem,4vw,4rem)}
+.tower-svg{height:min(78vh,720px);width:auto;overflow:visible}
+.tower-svg .floor{stroke:rgba(236,231,221,.16);stroke-width:1}
+.tower-svg .frame{fill:none;stroke:#ece7dd;stroke-width:5}
+.tower-svg .body{fill:rgba(236,231,221,.035);stroke:rgba(236,231,221,.35);stroke-width:1}
+.tower-svg .marker{fill:rgba(214,191,147,.22);stroke:var(--champagne);stroke-width:1.2}
+.tower-svg .label{fill:var(--muted);font:500 9px var(--sans);letter-spacing:.2em}
+.counter{display:flex;flex-direction:column;gap:.4rem}
+.counter-k{font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
+.counter-n{font-family:var(--serif);font-size:clamp(5rem,11vw,10rem);line-height:.85;color:var(--champagne-2);font-variant-numeric:tabular-nums}
+.counter-z{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--champagne);min-height:1.4em}
+.ascent-steps{position:relative}
+.step{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:4rem 0 4rem clamp(0rem,3vw,3rem);max-width:560px}
+.step h3{font-size:clamp(2.2rem,4.4vw,4.2rem);margin-bottom:1.4rem}
+.step h3 em{font-style:italic;color:var(--champagne-2)}
+.step .num{font-family:var(--serif);font-size:1rem;color:var(--champagne);letter-spacing:.2em;margin-bottom:1.2rem}
+
+/* ---------- Residence ---------- */
+.residence{padding-top:0}
+.residence-media{position:relative;height:clamp(420px,88vh,960px);overflow:hidden;margin:0 var(--pad)}
+.residence-media .img{background-image:url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2400&q=80"),linear-gradient(150deg,#5a4d3e,#221d18 55%,#0f0d0b)}
+.residence-media .img::after{background:linear-gradient(90deg,rgba(10,10,11,.55),transparent 55%)}
+.residence-media .overlay{position:absolute;left:clamp(1.25rem,4vw,4rem);top:50%;transform:translateY(-50%);z-index:2;max-width:520px}
+.residence-media h2{font-size:clamp(2.6rem,6vw,6rem);margin-bottom:1.4rem}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin:clamp(3rem,6vw,5rem) var(--pad) 0;border-top:1px solid var(--line)}
+.stat{padding:1.8rem 1.2rem 0 0}
+.stat b{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,4.5vw,4.4rem);line-height:1;color:var(--champagne-2)}
+.stat small{display:block;margin-top:.7rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- Sky Garden ---------- */
+.skygarden{padding:0}
+.sg-pin{position:relative;height:100vh;height:100svh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.sg-frame{position:absolute;inset:0;overflow:hidden;will-change:clip-path}
+.sg-frame .img{background-image:url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2400&q=80"),linear-gradient(180deg,#d58a5b 0%,#6c4a5a 40%,#1d2433 75%,#0a0a0b 100%)}
+.sg-frame .img::after{background:linear-gradient(180deg,rgba(10,10,11,.35),rgba(10,10,11,.1) 40%,rgba(10,10,11,.75))}
+.sg-copy{position:relative;z-index:2;text-align:center;padding:0 var(--pad);max-width:1100px}
+.sg-copy h2{font-size:clamp(3rem,10vw,10rem);line-height:.9;margin-bottom:1.6rem}
+.sg-copy .eyebrow{justify-content:center}
+.sg-copy .eyebrow::after{content:"";width:2.4rem;height:1px;background:var(--champagne);opacity:.7}
+.sg-features{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin:0 var(--pad);border:1px solid var(--line)}
+.sg-feature{background:var(--ink);padding:2rem 1.4rem}
+.sg-feature h4{font-family:var(--serif);font-weight:400;font-size:1.5rem;margin:0 0 .5rem;color:var(--champagne-2)}
+.sg-feature p{font-size:.88rem;color:var(--muted);margin:0}
+.sg-after{padding:clamp(4rem,9vh,7rem) 0 0}
+
+/* ---------- Penthouses ---------- */
+.ph-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(2.5rem,5vw,4.5rem)}
+.ph-head h2{max-width:12ch}
+.ph-head p{max-width:420px}
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,2rem)}
+.ph{position:relative}
+.ph-media{position:relative;aspect-ratio:3/4;overflow:hidden}
+.ph-media .img{transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.ph:hover .ph-media .img{transform:scale(1.05)}
+.ph:nth-child(1) .img{background-image:url("https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"),linear-gradient(160deg,#5c5043,#1b1814)}
+.ph:nth-child(2) .img{background-image:url("https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80"),linear-gradient(160deg,#4d4438,#16130f)}
+.ph:nth-child(3) .img{background-image:url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"),linear-gradient(160deg,#3d4a3a,#121611)}
+.ph-media .img::after{background:linear-gradient(180deg,transparent 50%,rgba(10,10,11,.7))}
+.ph-roman{position:absolute;left:1.2rem;bottom:1rem;z-index:2;font-family:var(--serif);font-size:3rem;line-height:1;color:var(--champagne-2)}
+.ph-body{padding:1.3rem 0 0}
+.ph-body h3{font-size:1.7rem;margin-bottom:.4rem}
+.ph-body p{color:var(--muted);font-size:.9rem;margin:0}
+
+/* ---------- Finale ---------- */
+.finale{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:8rem 0 0;flex-direction:column}
+.finale .img{background-image:url("https://images.unsplash.com/photo-1565967511849-76a60a516170?auto=format&fit=crop&w=2400&q=80"),radial-gradient(80% 60% at 50% 40%,#2a2f45 0%,#12131c 55%,#0a0a0b 100%)}
+.finale .img::after{background:linear-gradient(180deg,var(--ink) 0%,rgba(10,10,11,.35) 30%,rgba(10,10,11,.55) 70%,var(--ink) 100%)}
+.finale-inner{position:relative;z-index:2;padding:0 var(--pad);flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.finale h2{font-size:clamp(3rem,10vw,10.5rem);line-height:.9;margin-bottom:2rem}
+.finale h2 em{font-style:italic;color:var(--champagne-2)}
+.btn{display:inline-flex;align-items:center;gap:.9rem;padding:1.1rem 2.1rem;border:1px solid var(--champagne);color:var(--ink);background:var(--champagne);text-decoration:none;font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;font-weight:500;transition:background .35s,color .35s}
+.btn:hover{background:transparent;color:var(--champagne)}
+.btn.ghost{background:transparent;color:var(--text);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--champagne);color:var(--champagne)}
+.cta-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1rem}
+.footer{position:relative;z-index:2;width:100%;display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;padding:2rem var(--pad);border-top:1px solid var(--line);font-size:.72rem;letter-spacing:.08em;color:var(--muted);margin-top:5rem;text-align:left}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .hud{right:auto;left:var(--pad);top:auto;bottom:1rem;transform:none;flex-direction:row-reverse;gap:.8rem;background:rgba(10,10,11,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:.55rem .9rem;border:1px solid var(--line);border-radius:999px}
+  .hud-text{text-align:left;display:flex;align-items:baseline;gap:.7rem}
+  .hud-level{font-size:1.2rem}
+  .hud-name{margin:0;font-size:.6rem}
+  .hud-rail{display:none}
+  .scroll-cue{display:none}
+  .lobby{grid-template-columns:1fr}
+  .lobby-media{aspect-ratio:4/3}
+  .gardens-copy{grid-template-columns:1fr;gap:1.6rem;padding-bottom:5rem}
+  .ascent{grid-template-columns:1fr}
+  .ascent-visual{top:0;height:44vh;height:44svh;z-index:2;background:linear-gradient(var(--ink) 80%,rgba(10,10,11,0));justify-content:flex-start;padding-top:4.5rem}
+  .tower-svg{height:32vh}
+  .counter-n{font-size:4.2rem}
+  .step{min-height:80vh;padding:2rem 0 3rem;justify-content:flex-start}
+  .residence-media .img::after{background:linear-gradient(0deg,rgba(10,10,11,.85),rgba(10,10,11,.2) 70%)}
+  .residence-media .overlay{top:auto;bottom:2rem;transform:none;right:1.25rem}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .sg-features{grid-template-columns:repeat(2,1fr)}
+  .ph-grid{grid-template-columns:1fr}
+  .ph-media{aspect-ratio:4/3}
+  .footer{padding-bottom:5.5rem}
+}
+@media (max-width:520px){
+  .topbar .cta-mini{display:none}
+  .amenities{grid-template-columns:1fr}
+  .sg-features{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#street">THE SCOTTS TOWER</a>
+  <a class="cta-mini" href="#contact">Private Viewing</a>
+</header>
+
+<!-- Persistent level HUD -->
+<aside class="hud" aria-live="polite" aria-label="Current level">
+  <div class="hud-text">
+    <div class="hud-level" id="hudLevel">G</div>
+    <div class="hud-name" id="hudName">Street Level</div>
+  </div>
+  <div class="hud-rail"><div class="hud-fill" id="hudFill"></div><div class="hud-dot" id="hudDot"></div></div>
+</aside>
+
+<main>
+
+<!-- 1. HERO -->
+<section class="hero" id="street" data-level="G" data-name="Street Level">
+  <div class="img" data-parallax role="img" aria-label="White-framed tower facade at dusk"></div>
+  <div class="hero-inner">
+    <h1 aria-label="The Scotts Tower">
+      <span class="line"><span>THE SCOTTS</span></span>
+      <span class="line"><span>TOWER</span></span>
+    </h1>
+    <div class="hero-meta">
+      <div class="tagline" data-reveal>A VERTICAL CITY.</div>
+      <div class="loc" data-reveal>38 Scotts Road · Orchard, Singapore</div>
+    </div>
+  </div>
+  <div class="scroll-cue">Ascend<i></i></div>
+</section>
+
+<!-- 2. SKY LOBBY -->
+<section class="section wrap" id="lobby" data-level="01–02" data-name="The Sky Lobby">
+  <div class="lobby">
+    <div class="lobby-media" data-clip>
+      <div class="img" data-parallax-soft role="img" aria-label="Warm, elevated hotel-style lobby lounge"></div>
+      <span class="tag">Level 01–02 · Sky Lobby</span>
+    </div>
+    <div class="lobby-copy">
+      <span class="eyebrow" data-reveal>Private Arrival</span>
+      <h2 data-reveal>Eight metres<br>above <em>Scotts Road.</em></h2>
+      <p class="lede" data-reveal>The city falls away the moment you arrive. Lifted eight metres above the street, the Sky Lobby greets you with a hushed lounge, a softly lit bar and the calm of a private hotel.</p>
+      <p class="muted" data-reveal>Here the day ends with a drink among neighbours, and evenings begin without ever leaving home.</p>
+      <ul class="detail-list" data-reveal>
+        <li><span>Elevation</span><span>8 m above street level</span></li>
+        <li><span>Spaces</span><span>Sky lounge &amp; bar</span></li>
+        <li><span>Experience</span><span>Welcoming, discreet, residents only</span></li>
+      </ul>
+      <div class="lobby-small" data-clip><div class="img" role="img" aria-label="Lounge bar detail in warm light"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. GROUND GARDENS -->
+<section class="section gardens" id="gardens" data-level="G" data-name="The Gardens">
+  <div class="gardens-stage">
+    <div class="img" data-zoom role="img" aria-label="Long lap pool framed by tropical gardens"></div>
+    <div class="gardens-copy">
+      <div>
+        <span class="eyebrow" data-reveal>Ground Gardens</span>
+        <h2 data-reveal>The resort<br>at your <em>feet.</em></h2>
+      </div>
+      <div>
+        <p class="lede" data-reveal>Beneath the tower lies a landscaped retreat: fifty metres of still water, shaded pavilions and gardens made for slow mornings.</p>
+        <div class="amenities" data-reveal>
+          <div class="amenity"><b>50 m</b><small>Lap pool</small></div>
+          <div class="amenity"><b>Hydro</b><small>Hydrotherapy &amp; children's pools</small></div>
+          <div class="amenity"><b>Wellness</b><small>Gym &amp; massage pavilions</small></div>
+          <div class="amenity"><b>Gather</b><small>Dining &amp; BBQ pavilions</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ASCENT -->
+<section class="ascent" id="ascent" data-level="02" data-name="The Residences">
+  <div class="ascent-visual">
+    <svg class="tower-svg" id="towerSvg" viewBox="0 0 220 640" aria-hidden="true">
+      <!-- generated in JS: floors, frames, marker -->
+    </svg>
+    <div class="counter">
+      <span class="counter-k">Level</span>
+      <span class="counter-n" id="counterN">02</span>
+      <span class="counter-z" id="counterZ">Neighbourhoods in the sky</span>
+    </div>
+  </div>
+  <div class="ascent-steps">
+    <article class="step" data-from="2" data-to="8" data-zone="Neighbourhoods in the sky">
+      <div class="num">I — The Concept</div>
+      <h3>A city,<br><em>stacked.</em></h3>
+      <p class="lede">UNStudio and Ben van Berkel imagined the tower as a series of neighbourhoods in the sky, divided by two sculpted sky frames.</p>
+      <p class="muted">Thirty-one storeys and 231 residences, each cluster with a character of its own. Completed in 2016 for Far East Organization.</p>
+    </article>
+    <article class="step" data-from="8" data-to="15" data-zone="City View residences">
+      <div class="num">II — City View</div>
+      <h3>Orchard,<br><em>framed.</em></h3>
+      <p class="lede">City View homes look out over the glow of Orchard Road: the skyline as your daily backdrop, the shopping belt a short stroll below.</p>
+    </article>
+    <article class="step" data-from="15" data-to="21" data-zone="Park View residences">
+      <div class="num">III — Park View</div>
+      <h3>Green,<br><em>uninterrupted.</em></h3>
+      <p class="lede">Park View homes turn toward the treetops and open sky. Same address, a quieter horizon.</p>
+    </article>
+    <article class="step" data-from="21" data-to="25" data-zone="Approaching the Sky Garden">
+      <div class="num">IV — The Home</div>
+      <h3>Room to<br><em>breathe.</em></h3>
+      <p class="lede">SOHO-style one to three-bedroom residences with ceilings rising up to 3.35 metres, flexible for living and working with equal ease.</p>
+      <p class="muted">Keep rising. Level 25 awaits.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 5. RESIDENCE INTERIOR -->
+<section class="section residence" id="residence" data-level="23" data-name="A Residence">
+  <div class="residence-media" data-clip>
+    <div class="img" data-parallax-soft role="img" aria-label="High-floor living room with floor-to-ceiling windows over the skyline"></div>
+    <div class="overlay">
+      <span class="eyebrow" data-reveal>High Above Orchard</span>
+      <h2 data-reveal>The skyline,<br><em>at home.</em></h2>
+      <p class="lede" data-reveal>Floor-to-ceiling glass draws the city into every room. By day, light. By night, a field of stars made of streets.</p>
+    </div>
+  </div>
+  <div class="stats" data-reveal>
+    <div class="stat"><b>31</b><small>Storeys</small></div>
+    <div class="stat"><b>231</b><small>Residences</small></div>
+    <div class="stat"><b>3.35 m</b><small>Ceilings up to</small></div>
+    <div class="stat"><b>1–3</b><small>Bedroom SOHO homes</small></div>
+  </div>
+</section>
+
+<!-- 6. SKY GARDEN -->
+<section class="section skygarden" id="skygarden" data-level="25" data-name="The Sky Garden">
+  <div class="sg-pin">
+    <div class="sg-frame" id="sgFrame"><div class="img" role="img" aria-label="Rooftop pool and deck at dusk above the city"></div></div>
+    <div class="sg-copy">
+      <span class="eyebrow">Level 25</span>
+      <h2>THE SKY<br><em>GARDEN</em></h2>
+      <p class="lede">Water at the height of the skyline. Swim, unwind and dine as the city turns gold beneath you.</p>
+    </div>
+  </div>
+  <div class="sg-after">
+    <div class="sg-features" data-reveal>
+      <div class="sg-feature"><h4>Sky Pools</h4><p>Pools suspended above Orchard, framed by open sky.</p></div>
+      <div class="sg-feature"><h4>Jacuzzi</h4><p>Warm water and a cool breeze, twenty-five floors up.</p></div>
+      <div class="sg-feature"><h4>Sun Deck</h4><p>Long afternoons stretched out above the city.</p></div>
+      <div class="sg-feature"><h4>Private Dining</h4><p>A party deck for evenings that deserve a view.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. PENTHOUSES -->
+<section class="section wrap" id="penthouses" data-level="PH" data-name="The Penthouses">
+  <div class="ph-head">
+    <div>
+      <span class="eyebrow" data-reveal>The Crown</span>
+      <h2 data-reveal>Three homes<br>at the <em>very top.</em></h2>
+    </div>
+    <p class="lede" data-reveal>Crowning the tower, three exclusive four-bedroom penthouse residences, each with a private roof garden open to the sky.</p>
+  </div>
+  <div class="ph-grid">
+    <article class="ph" data-reveal>
+      <div class="ph-media"><div class="img" role="img" aria-label="Penthouse living space"></div><span class="ph-roman">I</span></div>
+      <div class="ph-body"><h3>Penthouse I</h3><p>Four bedrooms · Private roof garden</p></div>
+    </article>
+    <article class="ph" data-reveal>
+      <div class="ph-media"><div class="img" role="img" aria-label="Penthouse lounge with city views"></div><span class="ph-roman">II</span></div>
+      <div class="ph-body"><h3>Penthouse II</h3><p>Four bedrooms · Private roof garden</p></div>
+    </article>
+    <article class="ph" data-reveal>
+      <div class="ph-media"><div class="img" role="img" aria-label="Roof garden terrace"></div><span class="ph-roman">III</span></div>
+      <div class="ph-body"><h3>Penthouse III</h3><p>Four bedrooms · Private roof garden</p></div>
+    </article>
+  </div>
+</section>
+
+<!-- 8. FINALE -->
+<section class="finale" id="contact" data-level="31" data-name="The Summit">
+  <div class="img" data-parallax role="img" aria-label="Singapore skyline at night"></div>
+  <div class="finale-inner">
+    <span class="eyebrow" data-reveal>38 Scotts Road · District 9</span>
+    <h2 data-reveal>LIVE ABOVE<br>THE <em>ORDINARY.</em></h2>
+    <p class="lede" data-reveal style="max-width:620px">Beside the Orchard Road shopping belt, moments from Newton MRT. Discover the tower in person.</p>
+    <div class="cta-row" data-reveal>
+      <!-- Replace href values with the official enquiry channel -->
+      <a class="btn" href="#">Arrange a Private Viewing →</a>
+      <a class="btn ghost" href="#street">Return to Street Level</a>
+    </div>
+  </div>
+  <footer class="footer">
+    <span>THE SCOTTS TOWER · 38 Scotts Road, Singapore</span>
+    <span>Concept site. Not affiliated with Far East Organization or UNStudio. Imagery is illustrative.</span>
+  </footer>
+</section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasGSAP = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+  var animate = hasGSAP && !reduce;
+
+  /* ---------- Tower SVG ---------- */
+  var FLOORS = 31, TOP = 40, BOTTOM = 600, X = 60, W = 100;
+  var svg = document.getElementById("towerSvg");
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs){ var n = document.createElementNS(NS, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); return n; }
+  function yFor(level){ return BOTTOM - (level / FLOORS) * (BOTTOM - TOP); }
+  if (svg){
+    svg.appendChild(el("line",{x1:0,y1:BOTTOM+20,x2:220,y2:BOTTOM+20,stroke:"rgba(236,231,221,.3)","stroke-width":1}));
+    svg.appendChild(el("rect",{class:"body",x:X,y:TOP,width:W,height:BOTTOM-TOP}));
+    // Sky Lobby lifted on columns
+    svg.appendChild(el("line",{x1:X+12,y1:BOTTOM,x2:X+12,y2:BOTTOM+20,stroke:"rgba(236,231,221,.35)"}));
+    svg.appendChild(el("line",{x1:X+W-12,y1:BOTTOM,x2:X+W-12,y2:BOTTOM+20,stroke:"rgba(236,231,221,.35)"}));
+    for (var i = 1; i < FLOORS; i++){
+      var y = yFor(i);
+      svg.appendChild(el("line",{class:"floor",x1:X,y1:y,x2:X+W,y2:y}));
+    }
+    // Two sky frames dividing the neighbourhoods
+    [[9,12],[19,22]].forEach(function(r){
+      svg.appendChild(el("rect",{class:"frame",x:X-6,y:yFor(r[1]),width:W+12,height:yFor(r[0])-yFor(r[1])}));
+    });
+    // Sky Garden band
+    svg.appendChild(el("rect",{x:X,y:yFor(25.5),width:W,height:yFor(24.5)-yFor(25.5),fill:"rgba(214,191,147,.12)"}));
+    // Labels
+    [["SKY LOBBY",1.5],["SKY GARDEN · 25",25],["PENTHOUSES",30]].forEach(function(l){
+      var t = el("text",{class:"label",x:X+W+12,y:yFor(l[1])+3}); t.textContent = l[0]; svg.appendChild(t);
+    });
+    var marker = el("rect",{class:"marker",id:"towerMarker",x:X-2,y:yFor(3),width:W+4,height:yFor(2)-yFor(3)});
+    svg.appendChild(marker);
+  }
+
+  var counterN = document.getElementById("counterN");
+  var counterZ = document.getElementById("counterZ");
+  var marker = document.getElementById("towerMarker");
+  var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
+  var ascent = document.getElementById("ascent");
+  var currentAscentLevel = 2;
+
+  function pad(n){ return (n < 10 ? "0" : "") + n; }
+  function setAscent(progress){
+    progress = Math.max(0, Math.min(1, progress));
+    var lvl = Math.round(2 + progress * 23);
+    currentAscentLevel = lvl;
+    if (counterN) counterN.textContent = pad(lvl);
+    if (marker){ marker.setAttribute("y", yFor(lvl + 1)); }
+    var zone = steps[0] ? steps[0].dataset.zone : "";
+    steps.forEach(function(s){ if (lvl >= +s.dataset.from) zone = s.dataset.zone; });
+    if (counterZ) counterZ.textContent = zone;
+    if (activeSection === ascent) setHUD(pad(lvl), lvl >= 24 ? "Approaching Level 25" : "The Residences");
+  }
+  function ascentProgress(){
+    var r = ascent.getBoundingClientRect();
+    var total = r.height - window.innerHeight;
+    return total > 0 ? (-r.top) / total : 0;
+  }
+
+  /* ---------- HUD (works with or without GSAP) ---------- */
+  var hudLevel = document.getElementById("hudLevel");
+  var hudName = document.getElementById("hudName");
+  var hudFill = document.getElementById("hudFill");
+  var hudDot = document.getElementById("hudDot");
+  var sections = Array.prototype.slice.call(document.querySelectorAll("[data-level]"));
+  var activeSection = sections[0];
+  function setHUD(level, name){
+    if (hudLevel.textContent !== level) hudLevel.textContent = level;
+    if (hudName.textContent !== name) hudName.textContent = name;
+  }
+  function onScroll(){
+    var mid = window.innerHeight * 0.5, found = sections[0];
+    sections.forEach(function(s){ if (s.getBoundingClientRect().top <= mid) found = s; });
+    activeSection = found;
+    if (found === ascent) setAscent(ascentProgress());
+    else setHUD(found.dataset.level, found.dataset.name);
+    if (!animate && ascent) setAscent(ascentProgress());
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+    hudFill.style.height = (p * 100) + "%";
+    hudDot.style.bottom = "calc(" + (p * 100) + "% - 3px)";
+  }
+  var ticking = false;
+  window.addEventListener("scroll", function(){
+    if (!ticking){ ticking = true; requestAnimationFrame(function(){ onScroll(); ticking = false; }); }
+  }, {passive:true});
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  if (!animate) return; // Reduced motion or no GSAP: everything is already visible.
+
+  /* ---------- GSAP motion ---------- */
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero intro
+  gsap.from(".hero h1 .line span", {yPercent:110, duration:1.4, ease:"power4.out", stagger:.12, delay:.15});
+  gsap.from(".hero .img", {scale:1.15, duration:2.4, ease:"power2.out"});
+  gsap.from(".hero-meta > *, .scroll-cue", {opacity:0, y:20, duration:1, delay:.8, stagger:.12, ease:"power2.out"});
+
+  // Parallax backgrounds
+  gsap.utils.toArray("[data-parallax]").forEach(function(img){
+    gsap.fromTo(img, {yPercent:-6}, {yPercent:8, ease:"none", scrollTrigger:{trigger:img.parentElement, start:"top bottom", end:"bottom top", scrub:true}});
+  });
+  gsap.utils.toArray("[data-parallax-soft]").forEach(function(img){
+    gsap.set(img, {scale:1.15});
+    gsap.fromTo(img, {yPercent:-5}, {yPercent:5, ease:"none", scrollTrigger:{trigger:img.parentElement, start:"top bottom", end:"bottom top", scrub:true}});
+  });
+
+  // Text reveals (once). A safety net below makes sure nothing stays hidden.
+  var revealed = [];
+  gsap.utils.toArray("[data-reveal]").forEach(function(node){
+    if (node.closest(".hero")) return;
+    var tw = gsap.from(node, {opacity:0, y:36, duration:1.1, ease:"power3.out",
+      scrollTrigger:{trigger:node, start:"top 88%", once:true}});
+    revealed.push({node:node, tween:tw});
+  });
+
+  // Image clip reveals
+  gsap.utils.toArray("[data-clip]").forEach(function(node){
+    var tw = gsap.from(node, {clipPath:"inset(18% 10% 18% 10%)", duration:1.6, ease:"power3.out",
+      scrollTrigger:{trigger:node, start:"top 85%", once:true}});
+    revealed.push({node:node, tween:tw});
+  });
+
+  // Gardens: slow zoom while pinned
+  ScrollTrigger.matchMedia({
+    "(min-width: 901px)": function(){
+      gsap.fromTo("#gardens [data-zoom]", {scale:1.2}, {scale:1, ease:"none",
+        scrollTrigger:{trigger:".gardens-stage", start:"top top", end:"+=80%", scrub:true, pin:true}});
+    },
+    "(max-width: 900px)": function(){
+      gsap.fromTo("#gardens [data-zoom]", {scale:1.15}, {scale:1, ease:"none",
+        scrollTrigger:{trigger:".gardens-stage", start:"top bottom", end:"bottom top", scrub:true}});
+    }
+  });
+
+  // Ascent: counter synced to scroll progress
+  ScrollTrigger.create({
+    trigger:ascent, start:"top top", end:"bottom bottom",
+    onUpdate:function(self){ setAscent(self.progress); }
+  });
+  steps.forEach(function(step){
+    gsap.fromTo(step.children, {opacity:.25}, {opacity:1, stagger:.05, ease:"none",
+      scrollTrigger:{trigger:step, start:"top 75%", end:"top 35%", scrub:true}});
+  });
+
+  // Sky Garden: framed window expands to full bleed while pinned
+  gsap.timeline({scrollTrigger:{trigger:".sg-pin", start:"top top", end:"+=110%", scrub:true, pin:true}})
+    .fromTo("#sgFrame", {clipPath: window.innerWidth < 901 ? "inset(16% 6% 16% 6% round 4px)" : "inset(14% 22% 14% 22% round 4px)"}, {clipPath:"inset(0% 0% 0% 0% round 0px)", ease:"power1.inOut"}, 0)
+    .fromTo("#sgFrame .img", {scale:1.25}, {scale:1, ease:"none"}, 0)
+    .fromTo(".sg-copy", {y:60}, {y:-30, ease:"none"}, 0);
+
+  // Penthouse images drift
+  gsap.utils.toArray(".ph-media .img").forEach(function(img, i){
+    gsap.fromTo(img, {yPercent:-4}, {yPercent:4 + i, ease:"none", scrollTrigger:{trigger:img, start:"top bottom", end:"bottom top", scrub:true}});
+  });
+
+  // Safety net: anything that should be visible but whose reveal never fired is forced visible.
+  function ensureVisible(){
+    var vh = window.innerHeight;
+    revealed.forEach(function(r){
+      if (r.done) return;
+      var top = r.node.getBoundingClientRect().top;
+      if (top < vh * 0.95){
+        if (r.tween && r.tween.progress() === 0 && !r.tween.isActive()){ r.tween.progress(1); }
+        if (parseFloat(getComputedStyle(r.node).opacity) < 0.98 && (!r.tween || !r.tween.isActive())){
+          gsap.set(r.node, {opacity:1, y:0, clipPath:"none"});
+        }
+        if (!r.tween || r.tween.progress() === 1) r.done = true;
+      }
+    });
+  }
+  ScrollTrigger.addEventListener("scrollEnd", ensureVisible);
+  window.addEventListener("load", function(){ ScrollTrigger.refresh(); setTimeout(ensureVisible, 1500); });
+  setTimeout(ensureVisible, 4000);
+})();
+</script>
+</body>
+</html>
