@@ -38,6 +38,7 @@ p{margin:0 0 1.1em}
 /* Image blocks: background with a graceful gradient fallback */
 .img{position:absolute;inset:0;background-size:cover;background-position:center;background-color:#1a1814}
 .img::after{content:"";position:absolute;inset:0;pointer-events:none}
+.img > svg.art{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 /* ---------- Top bar ---------- */
 .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1.3rem var(--pad);mix-blend-mode:normal;pointer-events:none}
@@ -239,7 +240,7 @@ p{margin:0 0 1.1em}
 
 <!-- 1. HERO -->
 <section class="hero" id="street" data-level="G" data-name="Street Level">
-  <div class="img" data-parallax role="img" aria-label="White-framed tower facade at dusk"></div>
+  <div class="img" data-parallax data-art="dusk" role="img" aria-label="White-framed tower facade at dusk"></div>
   <div class="hero-inner">
     <h1 aria-label="The Scotts Tower">
       <span class="line"><span>THE SCOTTS</span></span>
@@ -356,7 +357,7 @@ p{margin:0 0 1.1em}
 <!-- 6. SKY GARDEN -->
 <section class="section skygarden" id="skygarden" data-level="25" data-name="The Sky Garden">
   <div class="sg-pin">
-    <div class="sg-frame" id="sgFrame"><div class="img" role="img" aria-label="Rooftop pool and deck at dusk above the city"></div></div>
+    <div class="sg-frame" id="sgFrame"><div class="img" data-art="skyline" role="img" aria-label="Rooftop pool and deck at dusk above the city"></div></div>
     <div class="sg-copy">
       <span class="eyebrow">Level 25</span>
       <h2>THE SKY<br><em>GARDEN</em></h2>
@@ -400,7 +401,7 @@ p{margin:0 0 1.1em}
 
 <!-- 8. FINALE -->
 <section class="finale" id="contact" data-level="31" data-name="The Summit">
-  <div class="img" data-parallax role="img" aria-label="Singapore skyline at night"></div>
+  <div class="img" data-parallax data-art="night" role="img" aria-label="Singapore skyline at night"></div>
   <div class="finale-inner">
     <span class="eyebrow" data-reveal>38 Scotts Road · District 9</span>
     <h2 data-reveal>LIVE ABOVE<br>THE <em>ORDINARY.</em></h2>
@@ -482,6 +483,71 @@ p{margin:0 0 1.1em}
     var total = r.height - window.innerHeight;
     return total > 0 ? (-r.top) / total : 0;
   }
+
+
+  /* ---------- Illustrated fallbacks when a photo cannot load ---------- */
+  (function(){
+    var SVGNS = "http://www.w3.org/2000/svg";
+    function rng(seed){ return function(){ seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+    function build(kind){
+      var r = rng(kind === "night" ? 7 : kind === "skyline" ? 13 : 3);
+      var night = kind === "night";
+      var sky = kind === "dusk" ? ["#1c1d2b","#4a3a45","#a8694a","#d9a06a"]
+              : night ? ["#05060a","#0c1020","#1a2238","#2a2a3a"]
+              : ["#2a2440","#6b4a5e","#c7785a","#e6a875"];
+      var o = '<svg class="art" xmlns="'+SVGNS+'" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMax slice" aria-hidden="true">';
+      o += '<defs><linearGradient id="sk'+kind+'" x1="0" y1="0" x2="0" y2="1">';
+      sky.forEach(function(c,i){ o += '<stop offset="'+(i/(sky.length-1))+'" stop-color="'+c+'"/>'; });
+      o += '</linearGradient><radialGradient id="gl'+kind+'" cx=".5" cy="1" r=".7"><stop offset="0" stop-color="'+(night?"#d6bf93":"#ffd9a0")+'" stop-opacity="'+(night?".18":".35")+'"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>';
+      o += '<rect width="1600" height="1000" fill="url(#sk'+kind+')"/><rect width="1600" height="1000" fill="url(#gl'+kind+')"/>';
+      if (night) for (var st=0; st<70; st++) o += '<circle cx="'+(r()*1600).toFixed(0)+'" cy="'+(r()*420).toFixed(0)+'" r="'+(r()*1.2+.3).toFixed(1)+'" fill="#efe0bf" opacity="'+(r()*.5+.2).toFixed(2)+'"/>';
+      // distant city
+      var base = kind === "skyline" ? 760 : 1000, x = -20;
+      while (x < 1620){
+        var w = 40 + r()*90, h = (kind === "skyline" ? 60 : 120) + r()*(kind === "skyline" ? 220 : 300);
+        o += '<rect x="'+x.toFixed(0)+'" y="'+(base-h).toFixed(0)+'" width="'+w.toFixed(0)+'" height="'+h.toFixed(0)+'" fill="'+(night?"#0b0d14":"#1a1820")+'" opacity=".92"/>';
+        for (var wy = base-h+12; wy < base-8; wy += 14) for (var wx = x+6; wx < x+w-6; wx += 12)
+          if (r() < (night ? .28 : .14)) o += '<rect x="'+wx.toFixed(0)+'" y="'+wy.toFixed(0)+'" width="4" height="6" fill="#f1c98a" opacity="'+(r()*.6+.3).toFixed(2)+'"/>';
+        x += w + r()*14;
+      }
+      if (kind === "skyline"){
+        // sky-garden deck and pool in the foreground
+        o += '<rect x="0" y="760" width="1600" height="240" fill="#0d0f14"/>';
+        o += '<rect x="0" y="790" width="1600" height="90" fill="#24303f"/><rect x="0" y="790" width="1600" height="90" fill="url(#gl'+kind+')"/>';
+        for (var l=0;l<9;l++) o += '<rect x="'+(r()*1500).toFixed(0)+'" y="'+(800+l*9)+'" width="'+(60+r()*220).toFixed(0)+'" height="1.5" fill="#f3c189" opacity=".45"/>';
+        o += '<rect x="0" y="785" width="1600" height="5" fill="#ece7dd" opacity=".55"/>';
+        return o + '</svg>';
+      }
+      // THE TOWER: stacked neighbourhoods, white frames, two sky frames
+      var tx = night ? 1200 : 980, tw = 300, top = 70, bottom = 1000;
+      var blocks = [[top,330,-18],[372,610,22],[652,1000,0]];
+      o += '<rect x="'+(tx+20)+'" y="'+top+'" width="'+(tw-40)+'" height="'+(bottom-top)+'" fill="'+(night?"#0a0b10":"#15151b")+'"/>';
+      blocks.forEach(function(b){
+        var bx = tx + b[2], by = b[0], bh = b[1]-b[0];
+        o += '<rect x="'+bx+'" y="'+by+'" width="'+tw+'" height="'+bh+'" fill="'+(night?"#101219":"#1c1c24")+'"/>';
+        for (var fy = by+10; fy < by+bh-10; fy += 18) for (var fx = bx+12; fx < bx+tw-12; fx += 24){
+          var lit = r() < (night ? .55 : .35);
+          o += '<rect x="'+fx+'" y="'+fy+'" width="18" height="12" fill="'+(lit?"#f2cf94":"#2c3040")+'" opacity="'+(lit?(r()*.5+.45).toFixed(2):".7")+'"/>';
+        }
+        for (var v = 0; v <= tw; v += tw/5) o += '<rect x="'+(bx+v-2).toFixed(1)+'" y="'+by+'" width="4" height="'+bh+'" fill="#ece7dd" opacity=".85"/>';
+        o += '<rect x="'+bx+'" y="'+by+'" width="'+tw+'" height="'+bh+'" fill="none" stroke="#f4efe6" stroke-width="9"/>';
+      });
+      [[330,372],[610,652]].forEach(function(g){
+        o += '<rect x="'+(tx-26)+'" y="'+g[0]+'" width="'+(tw+52)+'" height="'+(g[1]-g[0])+'" fill="'+(night?"#1a1c26":"#3a2f30")+'" stroke="#f4efe6" stroke-width="11"/>';
+        o += '<rect x="'+(tx+10)+'" y="'+(g[0]+12)+'" width="'+(tw-20)+'" height="'+(g[1]-g[0]-24)+'" fill="#f1c98a" opacity="'+(night?".35":".22")+'"/>';
+      });
+      if (night) o += '<rect x="'+(tx-60)+'" y="'+top+'" width="'+(tw+120)+'" height="'+(bottom-top)+'" fill="url(#gl'+kind+')" opacity=".6"/>';
+      return o + '</svg>';
+    }
+    Array.prototype.forEach.call(document.querySelectorAll("[data-art]"), function(node){
+      var m = /url\(["']?([^"')]+)["']?\)/.exec(getComputedStyle(node).backgroundImage || "");
+      function fallback(){ if (!node.querySelector("svg.art")) node.insertAdjacentHTML("afterbegin", build(node.getAttribute("data-art"))); }
+      if (!m) return fallback();
+      var probe = new Image();
+      probe.onerror = fallback;
+      probe.src = m[1];
+    });
+  })();
 
   /* ---------- HUD (works with or without GSAP) ---------- */
   var hudLevel = document.getElementById("hudLevel");
