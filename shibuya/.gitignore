@@ -1,0 +1,5 @@
+frames/
+*.blend1
+data/photo/
+data/bv_*.pbf
+data/check.png
